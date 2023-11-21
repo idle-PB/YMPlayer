@@ -1,10 +1,12 @@
 ﻿;YMPLAYER Module 
-;Author Idle 
+;Author Idle  
 ;Windows x86 
-;Requires "YM2149SSND.dll
+;Plays tunes written for YM2149 chip in format .ym and .sndh
+;Requires "YM2149SSND.dll and Sndh_DLL.dll 
+;                    
 ;http://leonard.oxg.free.fr/download/StSound_1_43.zip
 
-DeclareModule YMPLAYER  
+DeclareModule YMPLAYER  ;YM2149 
   
   Structure ymMusicInfo
     *pSongName
@@ -16,8 +18,11 @@ DeclareModule YMPLAYER
     musicTimeInMs.l
   EndStructure
   
-  Declare YMLoad(ymfile.s)
-  Declare YMLoadMemory(*adr,size) 
+  #YM  = 0    ;type of file register dump   
+  #SNDH = 1   ;
+  
+  Declare YMLoad(ymfile.s,type=#YM)
+  Declare YMLoadMemory(*adr,size,type=#YM) 
   Declare YMPlay(sound) 
   Declare YMResume(sound) 
   Declare YMPause(sound) 
@@ -48,17 +53,25 @@ Module YMPLAYER
   PrototypeC.b YM_IsSeekable(*pMusic) : Global YM_IsSeekable.YM_IsSeekable
   PrototypeC.l YM_GetPosition(*pMusic) : Global YM_GetPosition.YM_GetPosition
   PrototypeC  YM_MusicSeek(*pMusic,timeInMs.l) : Global YM_MusicSeek.YM_MusicSeek
+ 
+  Prototype  SNDH_Init() : Global SNDH_Init.SNDH_Init
+  PrototypeC SNDH_Load(*pMusic,*rawSndhFile,sndhFileSize.i,hostReplayRate.i) : Global SNDH_Load.SNDH_Load
+  PrototypeC SNDH_InitSubSong(*pMusic,subSongId.i) : Global SNDH_InitSubSong.SNDH_InitSubSong
+  PrototypeC SNDH_AudioRender(*pMusic,*buffer,count.i,*pSampleViewInfo = 0) : Global SNDH_AudioRender.SNDH_AudioRender
   
-  Prototype pUSERCALLBACK(pmusic,*pBuffer,bufferlen.l)  
+  Prototype pUSERCALLBACK(*this,*pBuffer,bufferlen.l) 
   
   #REPLAY_RATE	=	44100
   #REPLAY_DEPTH	=	16
   #REPLAY_SAMPLELEN	= (#REPLAY_DEPTH/8)
   #REPLAY_NBSOUNDBUFFER	= 2
-  
+    
   Structure CSoundServer 
     tid.i
     kill.i
+    type.l
+    pause.l
+    *sndh_mem
     m_pmusic.l
     m_bufferSize.l
     m_currentBuffer.l
@@ -67,19 +80,19 @@ Module YMPLAYER
     *m_pSoundBuffer[#REPLAY_NBSOUNDBUFFER]
     *m_pUserCallback.pUSERCALLBACK 	 
   EndStructure   
-  
+    
   Declare CSoundServer_fillNextBuffer(*this.CSoundServer)
   
   Procedure waveOutProc(hwo.l,uMsg.l,dwInstance.l,dwParam1.l,dwParam2.l)
-    Protected *pserver.CSoundServer
+    Protected *this.CSoundServer
     
     If (#WOM_DONE = uMsg)
       
-      *pServer = dwInstance;
-      If *pServer
+      *this = dwInstance;
+      If *this
         
-        If *pServer\m_pUserCallback <> #Null 
-          CSoundServer_fillNextBuffer(*pServer)
+        If *this\m_pUserCallback <> #Null 
+          CSoundServer_fillNextBuffer(*this)
         EndIf   
       EndIf 
     EndIf 
@@ -124,7 +137,6 @@ Module YMPLAYER
       *this\m_pUserCallback = #Null
       waveOutReset_(*this\m_hWaveOut)					
       For i=0 To #REPLAY_NBSOUNDBUFFER-1
-        
         If *this\m_waveHeader[i]\dwFlags & #WHDR_PREPARED
           waveOutUnprepareHeader_(*this\m_hWaveOut,@*this\m_waveHeader[i],SizeOf(WAVEHDR))
         EndIf  
@@ -137,25 +149,30 @@ Module YMPLAYER
   
   Procedure  CSoundServer_fillNextBuffer(*this.CSoundServer)
     
+    
     If *this\m_waveHeader[*this\m_currentBuffer]\dwFlags & #WHDR_PREPARED 
       waveOutUnprepareHeader_(*this\m_hWaveOut,@*this\m_waveHeader[*this\m_currentBuffer],SizeOf(WAVEHDR));
     EndIf 
     
     If (*this\m_pUserCallback)
-      *this\m_pUserCallback(*this\m_pmusic,*this\m_pSoundBuffer[*this\m_currentBuffer],*this\m_bufferSize);
+      *this\m_pUserCallback(*this,*this\m_pSoundBuffer[*this\m_currentBuffer],*this\m_bufferSize)
     EndIf 
+    
+    If *this\pause 
+      FillMemory(*this\m_pSoundBuffer[*this\m_currentBuffer],*this\m_bufferSize,0,#PB_Unicode) 
+    EndIf   
     
     *this\m_waveHeader[*this\m_currentBuffer]\lpData = *this\m_pSoundBuffer[*this\m_currentBuffer];
     *this\m_waveHeader[*this\m_currentBuffer]\dwBufferLength = *this\m_bufferSize                 ;
     waveOutPrepareHeader_(*this\m_hWaveOut,@*this\m_waveHeader[*this\m_currentBuffer],SizeOf(WAVEHDR));
-    
+        
     waveOutWrite_(*this\m_hWaveOut,@*this\m_waveHeader[*this\m_currentBuffer],SizeOf(WAVEHDR));
-    
+     
     *this\m_currentBuffer+1
     If *this\m_currentBuffer >= #REPLAY_NBSOUNDBUFFER
       *this\m_currentBuffer = 0;
     EndIf   
-    
+        
   EndProcedure 
   
   ;-ymMusicInfo
@@ -184,59 +201,129 @@ Module YMPLAYER
     MessageRequester("error","Can't open YM2149SSND.dll") 
     End 
   EndIf    
-  
-  Procedure SoundServerCallback(pmusic,*pBuffer,size.i)
-    Protected nbSample   
+ 
+  If OpenLibrary(1,"Sndh_DLL.dll") 
+    Debug("OPENED: Sndh_DLL.dll")
     
-    If (pMusic)
-      nbSample = size >> 1;    
-      YM_ComputePCM(pMusic,*pBuffer,nbSample); 
+    SNDH_Init = GetFunction(1, "SNDH_Init")
+    SNDH_Load = GetFunction(1, "SNDH_Load")
+    SNDH_InitSubSong = GetFunction(1, "SNDH_InitSubSong")
+    SNDH_AudioRender = GetFunction(1, "SNDH_AudioRender")
+    
+  Else    
+    MessageRequester("error","Can't open Sndh_DLL.dll") 
+    End 
+  EndIf  
+  
+    
+  Procedure SoundServerCallbackYM(*this.CSoundServer,*pBuffer,size.i)
+    Protected nbSample   
+    If *this 
+       nbSample = size >> 1;    
+       YM_ComputePCM(*this\m_pmusic,*pBuffer,nbSample); 
     EndIf 
     
   EndProcedure 
   
+  Procedure SoundServerCallbackSNHD(*this.CSoundServer,*pBuffer,size.i)
+    Protected nbSample   
+    
+    If *this 
+       nbSample = size >> 1;    
+       If *this\pause = 0
+         SNDH_AudioRender(*this\m_pmusic,*pBuffer,nbSample)
+       EndIf   
+    EndIf  
+    
+  EndProcedure 
+   
   Procedure play_thread(*sound.CSoundServer)
     
     Protected et,len,ymInfo.ymMusicInfo
     
-    If *sound\m_pmusic 
-      YM_Information(*sound\m_pmusic,@ymInfo)
-      len = ymInfo\musicTimeInMs 
+    If *sound\type = #YM 
       
-      If CsoundServer_open(*sound,@soundServerCallback(),500)
-        YM_Play(*sound\m_pmusic)
-        Repeat  
-          Delay(1) 
-        Until *sound\kill 
-        CsoundServer_close(*sound);
-        YM_Destroy(*sound\m_pmusic) 
-        FreeMemory(*sound) 
-        *sound = 0 
+      If *sound\m_pmusic 
+        If CsoundServer_open(*sound,@soundServerCallbackYM(),500)
+          YM_Play(*sound\m_pmusic)
+          Repeat  
+            Delay(1) 
+          Until *sound\kill 
+          CsoundServer_close(*sound);
+          YM_Destroy(*sound\m_pmusic) 
+          FreeMemory(*sound) 
+          *sound = 0 
+        EndIf 
+      EndIf  
+      
+    ElseIf  *sound\type = #SNDH 
+      
+       If CsoundServer_open(*sound,@SoundServerCallbackSNHD(),500)
+         Repeat  
+            Delay(1) 
+          Until *sound\kill 
+         CsoundServer_close(*sound);
+         If MemorySize(*sound\sndh_mem) 
+           FreeMemory(*sound\sndh_mem)
+         EndIf 
+         FreeMemory(*sound) 
+         *sound = 0 
       EndIf 
+      
+    EndIf  
+        
+  EndProcedure   
+  
+  Procedure  YMLoad(ymfile.s,type=#YM)  ;type = #YM or #SNDH
+    Protected *sound.CSoundServer = AllocateMemory(SizeOf(CSoundServer))  
+    If *sound 
+      *sound\type = type 
+      If type = #YM 
+        *sound\m_pmusic = YM_Init()  
+        If *sound\m_pmusic
+          If YM_LoadFile(*sound\m_pmusic,ymfile)     
+            ProcedureReturn *sound 
+          EndIf  
+        EndIf 
+      Else 
+        fn= OpenFile(#PB_Any,ymfile)
+        filesize = FileSize(ymfile) 
+        *sound\sndh_mem = AllocateMemory(filesize)
+         ReadData(fn,*sound\sndh_mem,filesize)       
+        CloseFile(fn)
+        *sound\m_pmusic = SNDH_Init()  
+        If *sound\m_pmusic
+             If SNDH_Load(*sound\m_pmusic,*sound\sndh_mem,filesize,44100) 
+                If SNDH_InitSubSong(*sound\m_pmusic,1)  
+                  ProcedureReturn *sound 
+                EndIf   
+             EndIf 
+           EndIf
+       EndIf     
     EndIf  
   EndProcedure   
   
-  Procedure  YMLoad(ymfile.s)
+  Procedure YMLoadMemory(*adr,size,type=#YM) 
     Protected *sound.CSoundServer = AllocateMemory(SizeOf(CSoundServer))  
     If *sound 
-      *sound\m_pmusic = YM_Init()  
-      If *sound\m_pmusic
-        If YM_LoadFile(*sound\m_pmusic,ymfile)     
-          ProcedureReturn *sound 
-        EndIf  
-      EndIf     
-    EndIf  
-  EndProcedure   
-  
-  Procedure YMLoadMemory(*adr,size) 
-    Protected *sound.CSoundServer = AllocateMemory(SizeOf(CSoundServer))  
-    If *sound 
-      *sound\m_pmusic = YM_Init()  
-      If *sound\m_pmusic
-        If YM_LoadFromMemory(*sound\m_pmusic,*adr,size)     
-          ProcedureReturn *sound 
-        EndIf  
-      EndIf     
+      If type = #YM  
+        *sound\m_pmusic = YM_Init()  
+        If *sound\m_pmusic
+          If YM_LoadFromMemory(*sound\m_pmusic,*adr,size)     
+             ProcedureReturn *sound 
+          EndIf  
+        EndIf
+      Else 
+         *sound\sndh_mem=*adr
+         *sound\m_pmusic = SNDH_Init()  
+        If *sound\m_pmusic
+           If SNDH_Load(*sound\m_pmusic,*sound\sndh_mem,size,44100) 
+               If SNDH_InitSubSong(*sound\m_pmusic,1)  
+                  ProcedureReturn *sound 
+               EndIf   
+            EndIf 
+          EndIf
+       EndIf   
     EndIf   
   EndProcedure   
   
@@ -247,31 +334,50 @@ Module YMPLAYER
   EndProcedure   
   
   Procedure YMStop(*sound.CSoundServer) 
-    YM_Stop(*sound\m_pmusic)  
+    If *sound\type = #YM 
+      YM_Stop(*sound\m_pmusic) 
+    Else 
+      PauseThread(*sound\tid) 
+    EndIf   
   EndProcedure 
   
   Procedure YMPause(*sound.CSoundServer) 
-    YM_Pause(*sound\m_pmusic)
+     If *sound\type = #YM 
+       YM_Pause(*sound\m_pmusic)
+     Else 
+        *sound\pause = 1  
+     EndIf   
   EndProcedure   
   
   Procedure YMResume(*sound.CSoundServer) 
-     YM_Play(*sound\m_pmusic) 
+    If *sound\type = #YM 
+      YM_Play(*sound\m_pmusic)
+    Else 
+       *sound\pause = 0   
+    EndIf   
   EndProcedure   
   
   Procedure YMFree(*sound.CSoundServer) 
     
-    If *sound 
+    If *sound\type = #YM  
       YM_Stop(*sound\m_pmusic)   
       *sound\kill = 1
       If IsThread(*sound\tid) 
         WaitThread(*sound\tid) 
       EndIf   
+    Else 
+     *sound\kill = 1
+      If IsThread(*sound\tid) 
+        WaitThread(*sound\tid) 
+      EndIf        
     EndIf 
     
   EndProcedure   
   
   Procedure YMIsOver(*sound.CSoundServer) 
-     ProcedureReturn YM_IsOver(*sound\m_pmusic)
+    If *sound\type = #YM 
+      ProcedureReturn YM_IsOver(*sound\m_pmusic)
+    EndIf   
   EndProcedure  
   
 EndModule 
@@ -280,26 +386,26 @@ CompilerIf #PB_Compiler_IsMainFile
   
   UseModule YMPLAYER  
   
-  sound = YMLoad("Decade3DDots.ym") 
-  sound1 = YMLoad("Union Tcb 2.ym") 
-  YMplay(sound) 
-  Delay(1000) 
-  YMPause(sound)
-  YMplay(sound1) 
+  sound = YMLoad("Decade3DDots.ym",#YM) 
+  sound1 = YMLoad("Decade_Demo-Main_Menu.sndh",#SNDH) 
+  sound2 = YMLoad("Decade_Demo-Main_Menu.sndh",#SNDH)  
+  ;YMPlay(sound)
   Delay(1000)
-  YMpause(sound1) 
-  YMResume(sound) 
-  Delay(1000) 
-  YMresume(sound1)
+  YMplay(sound1)
+  Delay(250)  
+  YMPlay(sound2) 
+  Delay(1000)
+  YMPause(sound1) 
+  Debug "pause" 
   Delay(3000) 
+  YMResume(sound1) 
+  Debug "resume" 
+  Delay(15000)
+  YMFree(sound)
   YMFree(sound1) 
+  YMFree(sound2) 
   
-  Repeat
-    Delay(20) 
-  Until YMIsOver(sound)  
-  YMFree(sound) 
-  
-  Debug "waited" 
+  Debug "done" 
   
 CompilerEndIf 
 

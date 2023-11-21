@@ -1,0 +1,116 @@
+﻿  pch.cpp
+  AtariMachine.cpp
+  Mk68901.cpp
+  SndhFile.cpp
+  SteDac.cpp
+  ym2149c.cpp
+  ice_24.c
+  m68kcpu.c
+  m68kops.c
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(5878,12): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(5881,12): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(5885,26): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(6248,12): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(6251,12): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(6255,26): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(6612,12): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(6615,12): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(7020,12): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(7021,12): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(13355,23): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(13356,31): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(13358,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(13359,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(13566,23): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(13567,31): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(13569,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(13570,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(13777,23): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(13778,31): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(13780,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(13781,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(13988,23): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(13989,31): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(13991,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(13992,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(14199,23): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(14200,31): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(14202,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(14203,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(14410,23): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(14411,31): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(14413,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(14414,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(14621,23): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(14622,31): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(14624,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(14625,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(14832,23): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(14833,31): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(14835,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(14836,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(15043,23): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(15044,31): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(15046,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(15047,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(15254,23): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(15255,31): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(15257,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(15258,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(15465,23): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(15466,31): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(15468,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(15469,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(24250,14): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(24267,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(24374,14): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(24391,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(24498,14): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(24515,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(24622,14): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(24639,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(24746,14): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(24763,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(24870,14): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(24887,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(24994,14): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(25011,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(25118,14): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(25135,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(25242,14): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(25259,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(25366,14): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(25383,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(25490,14): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(25507,13): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(28428,15): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(28500,40): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(28508,11): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(28509,11): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(28663,15): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(28752,43): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(28760,11): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(28761,11): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(28918,24): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(28921,12): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(28923,11): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(28924,11): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(29023,25): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(29026,12): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(29027,12): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(29028,12): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(29232,24): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(29235,11): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(29237,11): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(29238,11): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(29338,25): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(29341,12): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(29342,12): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+E:\idle\inner\Sndh_DLL\AtariAudio\external\Musashi\m68kops.c(29343,12): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+  dllmain.cpp
+     Creating library E:\idle\inner\Sndh_DLL\Release\Sndh_DLL.lib and object E:\idle\inner\Sndh_DLL\Release\Sndh_DLL.exp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 2194 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Sndh_DLL.vcxproj -> E:\idle\inner\Sndh_DLL\Release\Sndh_DLL.dll
